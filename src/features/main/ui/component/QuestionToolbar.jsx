@@ -1,14 +1,13 @@
 import {SlidersHorizontal, ChevronDown} from 'lucide-react';
-import {useMain} from '../../hook/mainHook';
 
-const QuestionsToolbar = ({setSearch}) => {
-  const {
-    openDropdown,
-    setOpenDropdown,
-    filters,
-    dropdowns,
-    handleSelect,
-  } = useMain ();
+const QuestionsToolbar = ({
+  setSearch,
+  openDropdown,
+  setOpenDropdown,
+  filters,
+  dropdowns,
+  handleSelect,
+}) => {
 
   return (
     <div className="flex flex-col gap-3 border-b border-zinc-100 p-3 sm:p-4 lg:flex-row lg:items-center lg:justify-between lg:px-5">

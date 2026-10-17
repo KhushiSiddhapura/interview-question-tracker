@@ -180,6 +180,7 @@ export const useMain = () => {
       ];
       setMockQuestion (updatedQues);
       localStorage.setItem ('mockQuestion', JSON.stringify (updatedQues));
+      setQuesEdit (null);
     }
     navigate ('/');
     reset ();

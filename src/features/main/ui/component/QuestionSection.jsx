@@ -5,7 +5,16 @@ import Card from '../../../../shared/components/Card.jsx';
 import Button from '../../../../shared/components/Button.jsx';
 import {useMain} from '../../hook/mainHook.jsx';
 const QuestionsSection = () => {
-  const {setSearch, filteredData,navigate} = useMain ();
+  const {
+    setSearch,
+    filteredData,
+    navigate,
+    openDropdown,
+    setOpenDropdown,
+    filters,
+    dropdowns,
+    handleSelect,
+  } = useMain ();
   return (
     <section className="mt-7">
 
@@ -38,7 +47,14 @@ const QuestionsSection = () => {
             </span>
           </div>
         </div>
-        <QuestionsToolbar setSearch={setSearch} />
+        <QuestionsToolbar
+          setSearch={setSearch}
+          openDropdown={openDropdown}
+          setOpenDropdown={setOpenDropdown}
+          filters={filters}
+          dropdowns={dropdowns}
+          handleSelect={handleSelect}
+        />
         <QuestionsTable filteredData={filteredData} />
       </Card>
     </section>
