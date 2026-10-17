@@ -18,15 +18,19 @@ const QuestionsTable = ({filteredData}) => {
           <tbody>
             {filteredData.length > 0
               ? filteredData.map ((question, index) => (
-                  <QuestionRow key={index} question={question} index={index} />
+                  <QuestionRow
+                    key={question.id}
+                    question={question}
+                    index={index}
+                  />
                 ))
               : <tr>
-                  <td colSpan="6" className="px-6 py-12 text-center">
+                  <td colSpan={6} className="px-6 py-12 text-center">
                     <p className="text-base font-medium text-zinc-500">
-                      No questions added
+                      No questions found
                     </p>
                     <p className="mt-1 text-sm text-zinc-400">
-                      Add a question to see it here.
+                      Try changing your search or filters, or add a new question.
                     </p>
                   </td>
                 </tr>}

@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState, useMemo} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router';
 import {Data} from '../../../app/context/AuthContext';
@@ -44,9 +44,13 @@ export const useMain = () => {
     difficulty: 'All Difficulties',
     status: 'All Statuses',
   });
-  const userQuestion = mockQuestion.filter (
-    val => val.user === activeUser.email
+  const userQuestion = useMemo (
+    () => {
+      return (mockQuestion || []).filter (val => val.user === activeUser.email);
+    },
+    [mockQuestion, activeUser]
   );
+
   const dsa = userQuestion.filter (val => val.category === 'DSA');
   const tech = userQuestion.filter (val => val.category === 'Tech');
   const git = userQuestion.filter (val => val.category === 'Git');
@@ -194,41 +198,29 @@ export const useMain = () => {
     navigate ('/addQuestion');
   };
 
-  const [filteredData, setFilteredData] = useState ([]);
-  useEffect (
+  const filteredData = useMemo (
     () => {
-      setFilteredData (() => {
-        return userQuestion.filter (val => {
-          const matchesSearch = val.title
-            .toLowerCase ()
-            .includes (search.trim ().toLowerCase ());
+      return userQuestion.filter (val => {
+        const matchesSearch = val.title
+          .toLowerCase ()
+          .includes (search.trim ().toLowerCase ());
 
-          const matchesCategory =
-            obj.category === 'All Categories' || val.category === obj.category;
+        const matchesCategory =
+          obj.category === 'All Categories' || val.category === obj.category;
 
-          const matchesDifficulty =
-            obj.difficulty === 'All Difficulties' ||
-            val.difficulty === obj.difficulty;
+        const matchesDifficulty =
+          obj.difficulty === 'All Difficulties' ||
+          val.difficulty === obj.difficulty;
 
-          const matchesStatus =
-            obj.status === 'All Statuses' || val.status === obj.status;
+        const matchesStatus =
+          obj.status === 'All Statuses' || val.status === obj.status;
 
-          return (
-            matchesSearch &&
-            matchesCategory &&
-            matchesDifficulty &&
-            matchesStatus
-          );
-        });
+        return (
+          matchesSearch && matchesCategory && matchesDifficulty && matchesStatus
+        );
       });
     },
-    [
-      obj.category,
-      obj.status,
-      obj.difficulty,
-      search,
-      userQuestion,
-    ]
+    [userQuestion, search, obj]
   );
   useEffect (
     () => {

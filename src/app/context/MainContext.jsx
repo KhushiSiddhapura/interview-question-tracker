@@ -6,7 +6,7 @@ export const MainProvider = ({children}) => {
     JSON.parse (localStorage.getItem ('mockQuestion')) || []
   );
   const [quesEdit, setQuesEdit] = useState (null);
-
+  const [filteredData, setFilteredData] = useState ([]);
   return (
     <MainData.Provider
       value={{
@@ -14,6 +14,8 @@ export const MainProvider = ({children}) => {
         setMockQuestion,
         quesEdit,
         setQuesEdit,
+        filteredData,
+        setFilteredData,
       }}
     >
       {children}
