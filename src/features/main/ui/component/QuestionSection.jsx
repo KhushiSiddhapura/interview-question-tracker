@@ -37,7 +37,6 @@ const QuestionsSection = () => {
               {filteredData.length}
             </span>
           </div>
-          <span className="text-xs text-zinc-400">Last updated today</span>
         </div>
         <QuestionsToolbar setSearch={setSearch} />
         <QuestionsTable filteredData={filteredData} />

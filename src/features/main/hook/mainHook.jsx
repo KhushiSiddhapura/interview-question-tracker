@@ -194,26 +194,42 @@ export const useMain = () => {
     navigate ('/addQuestion');
   };
 
-  const filteredData = userQuestion.filter (val => {
-    const matchesSearch = val.title
-      .toLowerCase ()
-      .includes (search.trim ().toLowerCase ());
+  const [filteredData, setFilteredData] = useState ([]);
+  useEffect (
+    () => {
+      setFilteredData (() => {
+        return userQuestion.filter (val => {
+          const matchesSearch = val.title
+            .toLowerCase ()
+            .includes (search.trim ().toLowerCase ());
 
-    const matchesCategory =
-      obj.category === 'All Categories' || val.category === obj.category;
+          const matchesCategory =
+            obj.category === 'All Categories' || val.category === obj.category;
 
-    const matchesDifficulty =
-      obj.difficulty === 'All Difficulties' ||
-      val.difficulty === obj.difficulty;
+          const matchesDifficulty =
+            obj.difficulty === 'All Difficulties' ||
+            val.difficulty === obj.difficulty;
 
-    const matchesStatus =
-      obj.status === 'All Statuses' || val.status === obj.status;
+          const matchesStatus =
+            obj.status === 'All Statuses' || val.status === obj.status;
 
-    return (
-      matchesSearch && matchesCategory && matchesDifficulty && matchesStatus
-    );
-  });
-
+          return (
+            matchesSearch &&
+            matchesCategory &&
+            matchesDifficulty &&
+            matchesStatus
+          );
+        });
+      });
+    },
+    [
+      obj.category,
+      obj.status,
+      obj.difficulty,
+      search,
+      userQuestion,
+    ]
+  );
   useEffect (
     () => {
       if (quesEdit) {
