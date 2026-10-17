@@ -1,9 +1,9 @@
 import {ArrowUpRight, Target} from 'lucide-react';
 import Card from '../../../../shared/components/Card';
-import {useQuestion} from '../../hook/mainHook';
+import {useMain} from '../../hook/mainHook';
 
 const ProgressCard = () => {
-  const {pr} = useQuestion ();
+  const {pr} = useMain ();
   return (
     <Card className="mt-5 p-5 sm:p-6">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">

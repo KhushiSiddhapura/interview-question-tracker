@@ -1,6 +1,6 @@
 import {Plus, ChevronDown, ArrowLeftIcon} from 'lucide-react';
 import Button from '../../../../shared/components/Button';
-import {useQuestion} from '../../hook/mainHook';
+import {useMain} from '../../hook/mainHook';
 
 const Field = ({label, children}) => (
   <label className="block">
@@ -14,8 +14,15 @@ const inputClass =
   'h-10 w-full rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-700 outline-none placeholder:text-zinc-400 focus:border-orange-300';
 
 const QuestionModal = () => {
-  const {register, handleSubmit, errors, navigate, handleForm} = useQuestion ();
-
+  const {
+    register,
+    handleSubmit,
+    errors,
+    quesEdit,
+    setQuesEdit,
+    navigate,
+    handleForm,
+  } = useMain ();
   return (
     <div className="mx-auto max-w-xl rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl">
       <div className="flex items-start justify-between">
@@ -23,13 +30,19 @@ const QuestionModal = () => {
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
             <Plus size={19} />
           </div>
-          <h2 className="mt-4 text-xl font-bold text-zinc-900">Add Question</h2>
+          <h2 className="mt-4 text-xl font-bold text-zinc-900">
+            {quesEdit ? 'Edit Question' : 'Add Question'}
+          </h2>
+
           <p className="mt-1 text-sm text-zinc-500">
-            Add a new question to your preparation list.
+            {quesEdit
+              ? 'Update your question details.'
+              : 'Add a new question to your preparation list.'}
           </p>
         </div>
         <button
           onClick={() => {
+            setQuesEdit (null);
             navigate ('/');
           }}
           className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-100 border border-zinc-50 cursor-pointer"
@@ -141,12 +154,16 @@ const QuestionModal = () => {
         <div className="mt-6 flex justify-end gap-2 border-t border-zinc-100 pt-5">
           <span
             onClick={() => {
+              setQuesEdit (null);
               navigate ('/');
             }}
           >
             <Button type="button" variant="outline">Cancel</Button>
           </span>
-          <Button type="submit"><Plus size={15} /> Add Question</Button>
+          <Button type="submit">
+            <Plus size={15} />
+            {quesEdit ? 'Update Question' : 'Add Question'}
+          </Button>
         </div>
       </form>
     </div>

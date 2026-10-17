@@ -1,45 +1,14 @@
-import {useState} from 'react';
 import {SlidersHorizontal, ChevronDown} from 'lucide-react';
+import {useMain} from '../../hook/mainHook';
 
-const QuestionsToolbar = ({setSearch, setObj}) => {
-  const [openDropdown, setOpenDropdown] = useState (null);
-  const [filters, setFilters] = useState ({
-    category: 'All Categories',
-    difficulty: 'All Difficulties',
-    status: 'All Statuses',
-  });
-
-  const dropdowns = [
-    {
-      key: 'category',
-      label: 'All Categories',
-      options: ['DSA', 'Tech', 'Git'],
-    },
-    {
-      key: 'difficulty',
-      label: 'All Difficulties',
-      options: ['Easy', 'Medium', 'Hard'],
-    },
-    {
-      key: 'status',
-      label: 'All Statuses',
-      options: ['Not Started', 'In Progress', 'Completed'],
-    },
-  ];
-
-  const handleSelect = (key, value) => {
-    setFilters (prev => ({
-      ...prev,
-      [key]: value,
-    }));
-
-    setObj (prev => ({
-      ...prev,
-      [key]: value,
-    }));
-
-    setOpenDropdown (null);
-  };
+const QuestionsToolbar = ({setSearch}) => {
+  const {
+    openDropdown,
+    setOpenDropdown,
+    filters,
+    dropdowns,
+    handleSelect,
+  } = useMain ();
 
   return (
     <div className="flex flex-col gap-3 border-b border-zinc-100 p-3 sm:p-4 lg:flex-row lg:items-center lg:justify-between lg:px-5">

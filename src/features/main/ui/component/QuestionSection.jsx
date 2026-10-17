@@ -3,10 +3,9 @@ import QuestionsToolbar from './QuestionToolbar.jsx';
 import QuestionsTable from './QuestionTable.jsx';
 import Card from '../../../../shared/components/Card.jsx';
 import Button from '../../../../shared/components/Button.jsx';
-import {useMain, useQuestion} from '../../hook/mainHook.jsx';
+import {useMain} from '../../hook/mainHook.jsx';
 const QuestionsSection = () => {
-  const {navigate} = useQuestion ();
-  const {setObj, setSearch, filteredData} = useMain ();
+  const {setSearch, filteredData,navigate} = useMain ();
   return (
     <section className="mt-7">
 
@@ -40,7 +39,7 @@ const QuestionsSection = () => {
           </div>
           <span className="text-xs text-zinc-400">Last updated today</span>
         </div>
-        <QuestionsToolbar setSearch={setSearch} setObj={setObj} />
+        <QuestionsToolbar setSearch={setSearch} />
         <QuestionsTable filteredData={filteredData} />
       </Card>
     </section>

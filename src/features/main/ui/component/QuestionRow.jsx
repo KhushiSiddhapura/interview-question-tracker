@@ -1,12 +1,16 @@
-import {useState} from 'react';
 import {MoreHorizontal, Pencil, Trash2, ExternalLink, Eye} from 'lucide-react';
 import Badge from '../../../../shared/components/Badge';
-import {useQuestion} from '../../hook/mainHook';
+import {useMain} from '../../hook/mainHook';
 
 const QuestionRow = ({question, index}) => {
-  const {deleteQue, editQue} = useQuestion ();
-  const [showOptions, setShowOptions] = useState (false);
-  const [showQuestion, setShowQuestion] = useState (false);
+  const {
+    deleteQue,
+    editQue,
+    showOptions,
+    setShowOptions,
+    showQuestion,
+    setShowQuestion,
+  } = useMain ();
 
   return (
     <tr className="group border-b border-zinc-100 last:border-0 hover:bg-zinc-50/70">
@@ -37,7 +41,7 @@ const QuestionRow = ({question, index}) => {
         <div className="flex items-center justify-end gap-1 opacity-70 transition-opacity group-hover:opacity-100">
           <button
             onClick={() => {
-              editQue (question,index);
+              editQue (question.id);
             }}
             className="rounded-md p-1.5 text-zinc-500 hover:bg-orange-50 hover:text-orange-600"
             aria-label="Edit question"
@@ -47,7 +51,7 @@ const QuestionRow = ({question, index}) => {
 
           <button
             onClick={() => {
-              deleteQue (index);
+              deleteQue (question.id);
             }}
             className="rounded-md p-1.5 text-zinc-500 hover:bg-rose-50 hover:text-rose-600"
             aria-label="Delete question"
